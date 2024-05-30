@@ -3,7 +3,6 @@
     grid-template-rows: repeat(6, 1fr);
     grid-gap: 8px;
     padding: 10px;
-  
     box-sizing: border-box;
     width: 420px;
     height: 500px;
