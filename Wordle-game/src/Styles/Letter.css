@@ -1,0 +1,20 @@
+.letter {
+    border: 2px solid #ccc;
+    align-content: center;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    font-weight: bolder;
+    font-size: 24px;
+  }
+  
+  #Green {
+    background-color: rgb(3, 92, 3);
+  }
+  #Gray {
+    background-color: rgb(96, 96, 96);
+  }
+  #Yellow {
+    background-color: rgb(225, 225, 34);
+  }

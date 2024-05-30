@@ -1,0 +1,5 @@
+- making theme darker
+- making keyboard more beautiful
+- using context(it gives error now)
+- making code cleaner(add functions for delete and enter)
+- adding keyboard listener
