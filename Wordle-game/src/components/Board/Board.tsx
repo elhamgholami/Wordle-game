@@ -1,37 +1,29 @@
-import Letter from "./Letter"
-import '../../Styles/Board.css'
-interface BoardProps
-{
+import Letter from "./Letter";
+import "../../Styles/Board.css";
+interface BoardProps {
   board: string[][];
   boardColor: string[][];
+  error:[string, number];
 }
 
-function Board({board, boardColor}:BoardProps) {
+function Board({ board, boardColor, error }: BoardProps) {
   return (
     <div className="column">
-      <div className="row">
-        <Letter rowIndex={0} index={0} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={0} index={1} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={0} index={2} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={0} index={3} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={0} index={4} board={board} boardColor = {boardColor}></Letter>
-      </div>
-      <div className="row">
-        <Letter rowIndex={1} index={0} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={1} index={1} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={1} index={2} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={1} index={3} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={1} index={4} board={board} boardColor = {boardColor}></Letter>
-      </div>
-      <div className="row">
-        <Letter rowIndex={2} index={0} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={2} index={1} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={2} index={2} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={2} index={3} board={board} boardColor = {boardColor}></Letter>
-        <Letter  rowIndex={2} index={4} board={board} boardColor = {boardColor}></Letter>
-      </div>
+      {board.map((row, rowIndex) => (
+        <div key={rowIndex} className="row" id={error[1]==rowIndex?error[0]:""} >
+          {row.map((_, colIndex) => (
+            <Letter
+              key={colIndex}
+              rowIndex={rowIndex}
+              index={colIndex}
+              board={board}
+              boardColor={boardColor}
+            />
+          ))}
+        </div>
+      ))}
     </div>
-  )
+  );
 }
 
-export default Board
+export default Board;

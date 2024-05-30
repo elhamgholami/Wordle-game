@@ -11,10 +11,29 @@
   
   #Green {
     background-color: rgb(3, 92, 3);
+    animation: flip 0.5s ease forwards;
   }
   #Gray {
     background-color: rgb(96, 96, 96);
+    animation: flip 0.5s ease forwards;
   }
   #Yellow {
     background-color: rgb(225, 225, 34);
+    animation: flip 0.5s ease forwards;
   }
+  
+  @keyframes flip {
+    0% {
+      transform: rotateX(0);
+    }
+    45% {
+      transform: rotateX(90deg);
+    }
+    55% {
+      transform: rotateX(90deg);
+    }
+    100% {
+      transform: rotateX(0);
+    }
+  }
+  
