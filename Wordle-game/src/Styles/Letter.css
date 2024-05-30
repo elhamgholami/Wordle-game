@@ -10,30 +10,72 @@
   }
   
   #Green {
-    background-color: rgb(3, 92, 3);
-    animation: flip 0.5s ease forwards;
+    animation: flip-green 0.5s ease forwards;
   }
   #Gray {
-    background-color: rgb(96, 96, 96);
-    animation: flip 0.5s ease forwards;
+    animation: flip-gray 0.5s ease forwards;
   }
   #Yellow {
-    background-color: rgb(225, 225, 34);
-    animation: flip 0.5s ease forwards;
+    animation: flip-yellow 0.5s ease forwards;
   }
   
-  @keyframes flip {
+  @keyframes flip-yellow {
     0% {
       transform: rotateX(0);
+      background-color: black;
     }
     45% {
       transform: rotateX(90deg);
+      background-color: black;
     }
     55% {
       transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      background-color: black;
     }
     100% {
       transform: rotateX(0);
+      background-color: rgb(225, 225, 34);
+    }
+  }
+  
+  @keyframes flip-green {
+    0% {
+      transform: rotateX(0);
+      background-color: black;
+    }
+    45% {
+      transform: rotateX(90deg);
+      background-color: black;
+    }
+    55% {
+      transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      background-color: black;
+    }
+    100% {
+      transform: rotateX(0);
+      background-color: rgb(3, 92, 3);
+    }
+  }
+  
+  @keyframes flip-gray {
+    0% {
+      transform: rotateX(0);
+      background-color: black;
+    }
+    45% {
+      transform: rotateX(90deg);
+      background-color: black;
+    }
+    55% {
+      transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      background-color: black;
+    }
+    100% {
+      transform: rotateX(0);
+      background-color: rgb(96, 96, 96);
     }
   }
   

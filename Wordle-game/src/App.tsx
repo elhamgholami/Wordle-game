@@ -4,7 +4,7 @@ import "./App.css";
 import KeyBoard from "./components/KeyBoard/KeyBoard";
 import { boardColorDefault, boardDefault } from "./words";
 const correctString = "QUERY";
-
+const maxWordLength = 5;
 const App = () => {
   //The matrix for showing the result of the user input
   const [board, setBoard] = useState(boardDefault);
@@ -12,59 +12,63 @@ const App = () => {
   const [boardColor, setBoardColor] = useState(boardColorDefault);
   const [word, setWord] = useState({ rowIndex: 0, index: 0 });
 
+  const updateBoardAt = (row: number, col: number, value: string) => {
+    const updatedBoard = [...board];
+    updatedBoard[row][col] = value;
+    setBoard(updatedBoard);
+  };
+
+  const updateBoardColorAt = (row: number, col: number, color: string) => {
+    const updatedBoardColor = [...boardColor];
+    updatedBoardColor[row][col] = color;
+    setBoardColor(updatedBoardColor);
+  };
   const [emptyError, setEmptyError] = useState<[string, number]>(["", -1]);
 
   const deleteClicked = () => {
     if (word.index > 0) {
-      const newBoard = [...board];
-      newBoard[word.rowIndex][word.index - 1] = "";
-      setWord({ ...word, index: word.index - 1 });
-      setBoard(newBoard);
+      updateBoardAt(word.rowIndex, word.index - 1, "");
+      setWord((prevWord) => ({ ...prevWord, index: prevWord.index - 1 }));
     }
   };
 
   const enterClicked = () => {
-    if (word.index === 5) {
-      if (board[word.rowIndex].join("") === correctString) alert("You Won!");
-      setWord({ ...word, rowIndex: word.rowIndex + 1, index: 0 });
-      board[word.rowIndex].map((letter, index) => {
-        if (letter == correctString[index]) {
-          const newBoardColor = [...boardColor];
-          newBoardColor[word.rowIndex][index] = "Green";
-          setBoardColor(newBoardColor);
-        } else if (correctString.includes(letter)) {
-          const newBoardColor = [...boardColor];
-          newBoardColor[word.rowIndex][index] = "Yellow";
-          setBoardColor(newBoardColor);
-        } else {
-          const newBoardColor = [...boardColor];
-          newBoardColor[word.rowIndex][index] = "Gray";
-          setBoardColor(newBoardColor);
-        }
+    if (board[word.rowIndex].join("") === correctString) alert("You Won!");
+    if (word.index === maxWordLength) {
+      setWord((prevWord) => ({
+        ...prevWord,
+        rowIndex: prevWord.rowIndex + 1,
+        index: 0,
+      }));
+      board[word.rowIndex].forEach((letter, index) => {
+        const color =
+          letter === correctString[index]
+            ? "Green"
+            : correctString.includes(letter)
+            ? "Yellow"
+            : "Gray";
+        updateBoardColorAt(word.rowIndex, index, color);
       });
     } else {
-      console.log("ERROR: Word is not complete");
       setEmptyError(["error", word.rowIndex]);
+      alert("Word is not complete");
     }
   };
+
   const handleKeyClick = (char: string) => {
     setEmptyError(["", -1]);
-    const isDelete = char === "Delete";
-    const isEnter = char === "Enter";
-    if (isDelete) {
+    if (char === "Delete") {
       deleteClicked();
-    } else if (isEnter) {
+    } else if (char === "Enter") {
       enterClicked();
-    } else if (word.index < 5) {
-      const newBoard = [...board];
-      newBoard[word.rowIndex][word.index] = char;
-      setWord({ ...word, index: word.index + 1 });
-      setBoard(newBoard);
+    } else if (word.index < maxWordLength) {
+      updateBoardAt(word.rowIndex, word.index, char);
+      setWord((prevWord) => ({ ...prevWord, index: prevWord.index + 1 }));
     }
   };
 
   return (
-    <div className="app">
+    <div className="App">
       <nav>wordle</nav>
       <div className="game">
         <Board board={board} boardColor={boardColor} error={emptyError} />
